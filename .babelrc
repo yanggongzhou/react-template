@@ -1,0 +1,25 @@
+{
+    "presets": [
+        "react-app"
+    ],
+    "plugins": [
+        [
+            "babel-plugin-import",
+            {
+                "libraryName": "antd",
+                "libraryDirectory": "es",
+                "style": "css"
+            },
+            "antd"
+        ],
+        [
+            "babel-plugin-import",
+            {
+                "libraryName": "lodash",
+                "libraryDirectory": "",
+                "camel2DashComponentName": false
+            },
+            "lodash"
+        ]
+    ]
+}
