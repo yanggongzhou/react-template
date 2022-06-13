@@ -7,6 +7,7 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
+    "source-map-explorer": "^2.5.2",
     "typescript": "^4.0.8",
     "web-vitals": "^2.1.4"
   },
@@ -14,7 +15,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "npx eslint . --ext .js,.jsx.ts,.tsx",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "browserslist": {
     "production": [
