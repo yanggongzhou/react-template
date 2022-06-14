@@ -8,10 +8,12 @@ module.exports = function(app) {
   // 代理信息
   const proxyInfos = {
     '/dzapi': {
-      // 触发部署////
       target: 'http://192.168.0.241:8080',
       // target: 'http://127.0.0.1:7001',
-      changeOrigin: true
+      changeOrigin: true,
+      pathRewrite: {
+        '^/dzapi': ''
+      }
     },
     '/app': {
       target: 'http://120.92.92.218:8080/',

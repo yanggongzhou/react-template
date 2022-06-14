@@ -15,7 +15,6 @@ root.render(
     <Provider store={store}>
       <ConfigProvider locale={zhCN}>
         <RouterView/>
-        {/*<App></App>*/}
       </ConfigProvider>
     </Provider>
   </React.StrictMode>
