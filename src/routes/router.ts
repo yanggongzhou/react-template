@@ -2,7 +2,7 @@
 import { lazy } from "react";
 
 const Home = lazy(() => import("../views/home"));
-const Login = lazy(() => import("@/views/login"));
+const Login = lazy(() => import("../views/login"));
 
 export default [
   { path: "/", key: 1, name: "首页", component: Home },

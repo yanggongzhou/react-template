@@ -1,8 +1,14 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
+    "types": [
+      "jest",
+      "lodash"
+    ],
     "paths": {
-      "@/*": ["*"]
+      "@/*": [
+        "*", "src/*"
+      ]
     }
   }
 }

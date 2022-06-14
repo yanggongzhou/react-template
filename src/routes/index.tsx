@@ -6,7 +6,7 @@ import Routers from "./router";
 
 const RouterView = () => {
   return (<div style={{ width: "100%", height: "100%" }}>
-    <BrowserRouter>
+    {/*<BrowserRouter>*/}
       <HashRouter>
         {/* 导航跳转必须包裹在router中，不然组件无法使用useHistory和useLocation */}
         {/*<Navbar />*/}
@@ -23,7 +23,7 @@ const RouterView = () => {
           </Routes>
         </Suspense>
       </HashRouter>
-    </BrowserRouter>
+    {/*</BrowserRouter>*/}
   </div>);
 };
 
