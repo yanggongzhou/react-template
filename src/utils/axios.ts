@@ -2,10 +2,9 @@ import axios, { Method, AxiosResponse, AxiosError, AxiosRequestConfig, AxiosProm
 import { getToken, getUserId } from '@/utils/cookies';
 import { resetToken } from '@/store/modules/user.module';
 import { notification } from "antd";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { RootState } from "@/store";
 import { Store } from "redux";
+import { NavigateFunction } from "react-router/lib/hooks";
 
 // 定义接口
 interface PendingType {
@@ -19,16 +18,12 @@ interface PendingType {
 declare module 'axios' {
   export interface AxiosInstance {
     redux: Store<RootState>;
+    navigate: NavigateFunction;
     // store: RootState
   }
   export interface AxiosResponse<T = any> extends Promise<T> {}
 }
 
-const initAxios = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
-}
 
 // 取消重复请求
 const pending: PendingType[] = [];
@@ -38,6 +33,25 @@ const Service = axios.create({
   withCredentials: true,
   timeout: 5000
 });
+
+export const initAxios = (store: Store<RootState>, navigate: NavigateFunction) => {
+  if (!Service.redux) {
+    Object.defineProperty(Service, 'redux', {
+      get() {
+        return store;
+      },
+    });
+    Object.defineProperty(Service, 'navigate', {
+      get() {
+        return navigate;
+      },
+    });
+    window.addEventListener('pageshow', () => initAxios(store, navigate));
+  }
+  // 校验带过期时间的token等
+  // 5分钟检查一次token等信息
+  // setTimeout(() => initAxios(store), 5 * 60 * 1000);
+}
 
 // 添加请求拦截器
 Service.interceptors.request.use(
@@ -69,9 +83,9 @@ Service.interceptors.response.use(
     try {
       if (response.data.retCode !== 0) {
         if (response.data.retCode === 6) {
-          // navigate('/login')
+          Service.navigate('/login');
           // 清除用户信息
-          // dispatch(resetToken());
+          Service.redux.dispatch(resetToken());
           notification.error({ message: '登录失效', placement: 'topRight' });
         }
         notification.error({ message: response.data.retMsg, placement: 'topRight' })
@@ -82,16 +96,16 @@ Service.interceptors.response.use(
       return Promise.reject(err)
     }
   },
-  (err: AxiosError) => {
+  (err: AxiosError): any => {
     console.log('axios err--------------------------->', err)
     const navigator = window.navigator
     if (!navigator.onLine) {
       notification.error({ message: 'offline', placement: 'topRight' });
     // } else if (err.response?.status === 401) {
     //   notification.error({ message: '登录失效', placement: 'topRight' });
-    //   //   navigate('/401')
+    //   Service.navigate('/401')
     // } else if (err.response?.status === 404) {
-    //   navigate('/404')
+    //   Service.navigate('/404')
     } else if (err.response) {
       const { data } = err.response
       // notification.error({ message: (data as any)?.message || '', placement: 'topRight' })

@@ -1,15 +1,15 @@
 import React from "react";
 import { useEffect } from "react";
 import { userInfoAsync } from "@/store/modules/user.module";
-import { useStore } from "@/store";
+import { AppDispatch } from "@/store";
+import { useDispatch } from "react-redux";
 
 const Layout = () => {
 
-  const dispatch = useStore()
+  const dispatch = useDispatch<AppDispatch>()
 
   useEffect(() => {
     const a = dispatch(userInfoAsync())
-    console.log('a=======>', a)
   }, [])
   return <div>
     Layout

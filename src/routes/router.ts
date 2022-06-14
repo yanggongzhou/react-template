@@ -1,11 +1,21 @@
 // router.ts
-import { lazy } from "react";
+import { lazy, ComponentType } from "react";
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 
-const Home = lazy(() => import("@/views/home"));
-const Login = lazy(() => import("@/views/login"));
+NProgress.configure({ showSpinner: false });
+
+function AsyncComponent(
+  loader: () => Promise<{ default: ComponentType<any> }>
+) {
+  NProgress.start();
+  return lazy(() => loader().finally(() => NProgress.done()));
+}
+const Home = AsyncComponent(() => import("@/views/home"));
+const Login = AsyncComponent(() => import("@/views/login"));
 
 export default [
   { path: "/", key: 1, name: "首页", component: Home },
   { path: "/home", key: 2, name: "首页", component: Home },
-  { path: "/login", key: 2, name: "登录", component: Login },
+  { path: "/Login", key: 2, name: "首页", component: Login },
 ];

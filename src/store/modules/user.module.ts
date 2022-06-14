@@ -29,7 +29,7 @@ export interface IUser {
   userId: string;
   userName: string;
   email: string;
-  token: string;
+  userToken: string;
 }
 
 export const userSlice = createSlice({
@@ -38,14 +38,15 @@ export const userSlice = createSlice({
     userId: '',
     userName: '',
     email: '',
-    token: '',
+    userToken: '',
   } as IUser),
   reducers: {
-    setUserInfo: (state, action) => {
-      state = { ...state, ...action.payload }
+    setUserInfo: (state: IUser, action) => {
+      // console.log('setUserInfo--->', state, action)
+      return Object.assign({}, state,{ ...action.payload })
     },
     resetToken: (state) => {
-      state.token = '';
+      state.userToken = '';
     },
   },
   // 在extraReducers中可以对请求结果的成功失败，做不同的处理
@@ -57,6 +58,7 @@ export const userSlice = createSlice({
       .addCase(incrementAsync.fulfilled, (state, action) => {
         // state.status = 'idle';
         // state.value += action.payload;
+        console.log('fulfilled', state)
       });
   }
 });
