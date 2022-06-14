@@ -238,6 +238,14 @@ module.exports = function(webpackEnv) {
       splitChunks: {
         chunks: 'all',
         name: false,
+        cacheGroups: {
+          runtimes: {
+            priority: 99,
+            chunks: 'all',
+            test: /node_modules\/(react|redux|antd|@ant-|rc-)/,
+            name: false,
+          },
+        }
       },
       // Keep the runtime chunk separated to enable long term caching
       // https://twitter.com/wSokra/status/969679223278505985

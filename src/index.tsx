@@ -2,19 +2,22 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import zhCN from 'antd/es/locale/zh_CN';
 import { ConfigProvider } from "antd";
-import App from './app';
 import reportWebVitals from './reportWebVitals';
 import RouterView from "./routes";
+import { store } from '@/store';
+import { Provider } from "react-redux";
 import './index.css';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
   <React.StrictMode>
-    <ConfigProvider locale={zhCN}>
-      <RouterView/>
-      {/*<App></App>*/}
-    </ConfigProvider>
+    <Provider store={store}>
+      <ConfigProvider locale={zhCN}>
+        <RouterView/>
+        {/*<App></App>*/}
+      </ConfigProvider>
+    </Provider>
   </React.StrictMode>
 );
 
