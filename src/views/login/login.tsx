@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import { ILoginForm, login } from "@/service/user";
@@ -8,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { validateEmail } from "@/utils/validator";
 import { RootState } from "@/store";
 import { setLoading } from "@/store/modules/common.module";
-import style from './login.module.scss'
+import style from './login.module.scss';
 
 const { useForm, Item } = Form;
 const layout = {
@@ -24,24 +25,24 @@ export const Login = () => {
   const loginBtn = async ({ userName, password }: ILoginForm) => {
     console.log('表单实例--------->', form);
     const data = await login({ userName, password });
-    store.dispatch(setUserInfo(data))
-    store.dispatch(setLoading(false))
-    console.log('store----->', store, store.getState())
-    navigate('/')
-  }
+    store.dispatch(setUserInfo(data));
+    store.dispatch(setLoading(false));
+    console.log('store----->', store, store.getState());
+    navigate('/');
+  };
 
   // useSelector 从 store 状态读取一个值并订阅更新
   // useDispatch 返回 store 的dispatch方法调度操作。
   const { loginLoading } = useSelector((state: RootState) => ({
     loginLoading: state.common.loading
-  }))
+  }));
 
   // useEffect 可以执行有副作用的方法
   // useMemo useCallback 只能执行无副作用的方法
   useEffect(() => {
 
     // ...
-  }, [])
+  }, []);
 
   return <div className={style.loginWarp}>
     <Link to={'/'}>home</Link>

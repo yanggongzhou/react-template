@@ -4,18 +4,15 @@
     "react-app"
   ],
   "parser": "@typescript-eslint/parser",
-  "ignorePatterns": [
-    "scripts/*",
-    "config/*",
-    "build/*"
-  ],
   "plugins": [
     "@typescript-eslint",
-    "unicorn"
+    "unicorn",
+    "react",
+    "react-hooks"
   ],
   "rules": {
     "prefer-const": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "off",
     "indent": [
       "error",
       2,

@@ -31,7 +31,7 @@ export const userSlice = createSlice({
   reducers: {
 
     setUserInfo: (state: IUser, action) => {
-      return Object.assign({}, state,{ ...action.payload })
+      return Object.assign({}, state,{ ...action.payload }) as IUser;
     },
 
     resetToken: (state) => {

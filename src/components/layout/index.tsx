@@ -1,19 +1,20 @@
+/* eslint-disable */
 import React from "react";
 import { useEffect } from "react";
 import { userInfoAsync } from "@/store/modules/user.module";
-import { AppDispatch } from "@/store";
 import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store";
 
 const Layout = () => {
 
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    const a = dispatch(userInfoAsync())
-  }, [])
+    dispatch(userInfoAsync());
+  }, []);
   return <div>
     Layout
-  </div>
-}
+  </div>;
+};
 
 export default Layout;
