@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import RouterView from "./routes";
 import { store } from '@/store';
 import { Provider } from "react-redux";
+import 'normalize.css'; // 是一种CSS reset的替代方案
 import './index.css';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
