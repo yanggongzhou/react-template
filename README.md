@@ -39,7 +39,7 @@ react-template
 
 ## 定位
 React后台模版项目
-
+![img.png](img.png)
 ## run
 ### `npm install`
 ### `npm start`
