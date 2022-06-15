@@ -6,7 +6,6 @@ import { setUserInfo } from "@/store/modules/user.module";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-
   const store = useStore()
 
   const loginBtn = async () => {
@@ -16,7 +15,6 @@ const Login = () => {
     })
     store.dispatch(setUserInfo(data))
     console.log('store', store, store.getState())
-
   }
 
   useEffect(() => {

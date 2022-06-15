@@ -54,6 +54,7 @@ const config = configFactory('production');
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
 const { checkBrowsers } = require('react-dev-utils/browsersHelper');
+const before = Date.now();
 checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
     // First, read the current file sizes in build directory.
@@ -109,6 +110,7 @@ checkBrowsers(paths.appPath, isInteractive)
         buildFolder,
         useYarn
       );
+      console.log(chalk.green(`耗时: ${(Date.now() - before) / 1000} Seconds`));
     },
     err => {
       console.log(chalk.red('Failed to compile.\n'));

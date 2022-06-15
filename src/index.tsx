@@ -9,7 +9,9 @@ import { Provider } from "react-redux";
 import './index.css';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
-
+// React.StrictMode 严格模式; 在严格模式下会执行两次render以帮忙检查额外的副作用。
+// 这仅适用于开发模式。生产模式下生命周期不会被调用两次。
+// Learn more: https://zh-hans.reactjs.org/docs/strict-mode.html
 root.render(
   <React.StrictMode>
     <Provider store={store}>
