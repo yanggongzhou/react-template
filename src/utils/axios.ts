@@ -5,6 +5,7 @@ import { notification } from "antd";
 import { RootState } from "@/store";
 import { Store } from "redux";
 import { NavigateFunction } from "react-router/lib/hooks";
+import { HashHistory } from "history";
 
 // 定义接口
 interface PendingType {
@@ -19,7 +20,6 @@ declare module 'axios' {
   export interface AxiosInstance {
     redux: Store<RootState>;
     navigate: NavigateFunction;
-    // store: RootState
   }
   export interface AxiosResponse<T = any> extends Promise<T> {}
 }
@@ -34,7 +34,7 @@ const Service = axios.create({
   timeout: 5000
 });
 
-export const initAxios = (store: Store<RootState>, navigate: NavigateFunction) => {
+export const initAxios = (store: Store<RootState>, navigate: HashHistory) => {
   if (!Service.redux) {
     Object.defineProperty(Service, 'redux', {
       get() {
@@ -102,8 +102,8 @@ Service.interceptors.response.use(
     if (!navigator.onLine) {
       notification.error({ message: 'offline', placement: 'topRight' });
     // } else if (err.response?.status === 401) {
-    //   notification.error({ message: '登录失效', placement: 'topRight' });
-    //   Service.navigate('/401')
+      // notification.error({ message: '登录失效', placement: 'topRight' });
+      // Service.navigate('/401')
     // } else if (err.response?.status === 404) {
     //   Service.navigate('/404')
     } else if (err.response) {
